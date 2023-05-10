@@ -1,0 +1,15 @@
+{
+  "name": "@pqina/filepond-plugin-image-editor",
+  "version": "9.0.0",
+  "browser": "FilePondPluginImageEditor.esm.js",
+  "main": "FilePondPluginImageEditor.esm.js",
+  "types": "FilePondPluginImageEditor.d.ts",
+  "type": "module",
+  "author": "Rik Schennink at PQINA",
+  "homepage": "https://pqina.nl/pintura/",
+  "license": "https://pqina.nl/pintura/license/",
+  "description": "A FilePond plugin to connect with Pintura",
+  "peerDependencies": {
+    "filepond": "4.x"
+  }
+}
