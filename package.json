@@ -1,9 +1,9 @@
 {
     "name": "@pqina/filepond-plugin-image-editor",
-    "version": "9.0.1",
+    "version": "9.0.2",
     "browser": "dist/FilePondPluginImageEditor.js",
     "main": "dist/FilePondPluginImageEditor.js",
-    "types": "FilePondPluginImageEditor.d.ts",
+    "types": "dist/FilePondPluginImageEditor.d.ts",
     "author": "Rik Schennink at PQINA",
     "homepage": "https://pqina.nl/pintura/",
     "license": "https://pqina.nl/pintura/license/",
@@ -14,7 +14,7 @@
     ],
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
+        "build": "vite build && cp -rf src/FilePondPluginImageEditor.d.ts dist/FilePondPluginImageEditor.d.ts",
         "preview": "vite preview"
     },
     "peerDependencies": {

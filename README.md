@@ -9,6 +9,7 @@ Example projects:
 -   https://github.com/pqina/pintura-example-javascript
 -   https://github.com/pqina/pintura-example-jquery
 -   https://github.com/pqina/pintura-example-react
+-   https://github.com/pqina/pintura-example-react-typescript
 -   https://github.com/pqina/pintura-example-vue-2
 -   https://github.com/pqina/pintura-example-vue-3
 -   https://github.com/pqina/pintura-example-angular
