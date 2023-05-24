@@ -16,3 +16,5 @@ Example projects:
 -   https://github.com/pqina/pintura-example-nextjs
 -   https://github.com/pqina/pintura-example-nuxt-2
 -   https://github.com/pqina/pintura-example-nuxt-3
+-   https://github.com/pqina/pintura-example-svelte
+-   https://github.com/pqina/pintura-example-sveltekit
