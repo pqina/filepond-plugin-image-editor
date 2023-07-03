@@ -15,6 +15,9 @@ declare module 'filepond' {
         /** Override detection of edit support */
         imageEditorSupportEdit?: boolean;
 
+        /** Return true if editor can load this image format, defaults to what the browser supports */
+        imageEditorSupportImageFormat?: (file: File) => boolean;
+
         /** Override detection of write support */
         imageEditorSupportWriteImage?: boolean;
 

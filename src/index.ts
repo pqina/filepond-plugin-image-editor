@@ -331,8 +331,6 @@ const plugin = (_) => {
                 src: file,
             });
 
-            console.log('load editor', structuredClone(item.getMetadata()));
-
             // when the image has loaded, update the editor
             editor.on('load', ({ size }) => {
                 // get current image edit state
@@ -544,9 +542,17 @@ const plugin = (_) => {
                             return filterResult.then(resolve);
                         }
                     }
+
                     resolve(true);
                 })
                 .catch(() => {
+                    // browser doesn't support image, but perhaps Pintura does?
+                    const imageEditorSupportFormat = query('GET_IMAGE_EDITOR_SUPPORT_IMAGE_FORMAT');
+                    if (imageEditorSupportFormat && imageEditorSupportFormat(file)) {
+                        resolve(true);
+                        return;
+                    }
+
                     resolve(false);
                 });
         });
@@ -638,6 +644,9 @@ const plugin = (_) => {
 
             // receives file and should return true if can edit
             imageEditorSupportImage: [isImage, Type.FUNCTION],
+
+            // receives file, should return true if can be loaded with Pintura
+            imageEditorSupportImageFormat: [null, Type.FUNCTION],
 
             // cannot write if is <= IE11
             imageEditorSupportWriteImage: [isModernBrowser(), Type.BOOLEAN],

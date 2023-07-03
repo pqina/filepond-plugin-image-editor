@@ -12,24 +12,24 @@ const w = () => (j === null && (j = typeof window < "u" && typeof window.documen
   for (; e.lastChild; )
     e.removeChild(e.lastChild);
   o !== void 0 && e.append(o);
-}, B = w() && Q("div", {
+}, N = w() && Q("div", {
   class: "PinturaMeasure",
   style: "position:absolute;left:0;top:0;width:99999px;height:0;pointer-events:none;contain:strict;margin:0;padding:0;"
 });
 let K;
-const Ee = (e) => (se(B, e), B.parentNode || document.body.append(B), clearTimeout(K), K = setTimeout(() => {
-  B.remove();
+const Ee = (e) => (se(N, e), N.parentNode || document.body.append(N), clearTimeout(K), K = setTimeout(() => {
+  N.remove();
 }, 500), e);
 let H = null;
 const de = () => (H === null && (H = w() && /^((?!chrome|android).)*(safari|iphone|ipad)/i.test(navigator.userAgent)), H), ce = (e) => new Promise((o, g) => {
   let T = !1;
   !e.parentNode && de() && (T = !0, e.style.cssText = "position:absolute;visibility:hidden;pointer-events:none;left:0;top:0;width:0;height:0;", Ee(e));
   const E = () => {
-    const L = e.naturalWidth, N = e.naturalHeight;
-    L && N && (T && e.remove(), clearInterval(l), o({ width: L, height: N }));
+    const M = e.naturalWidth, B = e.naturalHeight;
+    M && B && (T && e.remove(), clearInterval(l), o({ width: M, height: B }));
   };
-  e.onerror = (L) => {
-    clearInterval(l), g(L);
+  e.onerror = (M) => {
+    clearInterval(l), g(M);
   };
   const l = setInterval(E, 1);
   E();
@@ -42,7 +42,7 @@ const de = () => (H === null && (H = w() && /^((?!chrome|android).)*(safari|ipho
   };
   if (e.readyState >= 1)
     return T();
-  e.onloadedmetadata = T, e.onerror = g;
+  e.onloadedmetadata = T, e.onerror = () => g(e.error);
 }), _e = (e) => typeof e == "string", Ie = (e) => new Promise((o) => {
   const g = _e(e) ? e : URL.createObjectURL(e), T = () => {
     const l = new Image();
@@ -94,8 +94,8 @@ const pe = () => {
 let z = null;
 const X = () => (z === null && (z = w() && // Can't run on Opera Mini due to lack of everything
 !Oe() && // Require these APIs to feature detect a modern browser
-Ge() && Re() && Me() && he() && Ae()), z), Le = (e) => {
-  const { addFilter: o, utils: g, views: T } = e, { Type: E, createRoute: l } = g, { fileActionButton: L } = T, y = (({ parallel: i = 1, autoShift: n = !0 }) => {
+Ge() && Re() && Me() && he() && Ae()), z), Se = (e) => {
+  const { addFilter: o, utils: g, views: T } = e, { Type: E, createRoute: l } = g, { fileActionButton: M } = T, y = (({ parallel: i = 1, autoShift: n = !0 }) => {
     const r = [];
     let t = 0;
     const s = () => {
@@ -116,7 +116,7 @@ Ge() && Re() && Me() && he() && Ae()), z), Le = (e) => {
       }
     };
     return f;
-  })({ parallel: 1 }), v = (i) => i === null ? {} : i;
+  })({ parallel: 1 }), F = (i) => i === null ? {} : i;
   o(
     "SHOULD_REMOVE_ON_REVERT",
     (i, { item: n, query: r }) => new Promise((t) => {
@@ -154,7 +154,7 @@ Ge() && Re() && Me() && he() && Ae()), z), Le = (e) => {
     });
   });
   const b = [], te = (i) => (b.push(i), i), ie = (i) => {
-    const { imageProcessor: n, imageReader: r, imageWriter: t } = v(
+    const { imageProcessor: n, imageReader: r, imageWriter: t } = F(
       i("GET_IMAGE_EDITOR")
     );
     return i("GET_IMAGE_EDITOR_WRITE_IMAGE") && i("GET_IMAGE_EDITOR_SUPPORT_WRITE_IMAGE") && n && r && t;
@@ -174,24 +174,24 @@ Ge() && Re() && Me() && he() && Ae()), z), Le = (e) => {
       editorOptions: f,
       legacyDataToImageState: I,
       imageState: p
-    } = v(i("GET_IMAGE_EDITOR"));
+    } = F(i("GET_IMAGE_EDITOR"));
     if (!t)
       return;
-    const [m, O] = s, [R = Y, S] = _, P = n.file, h = n.getMetadata("imageState"), D = ne(i, {
+    const [m, O] = s, [R = Y, S] = _, L = n.file, h = n.getMetadata("imageState"), P = ne(i, {
       width: 512,
       height: 512
-    }), C = {
+    }), U = {
       ...f,
       imageReader: m(O),
       imageWriter: R({
         // can optionally overwrite poster size
         ...S || {},
         // limit memory so poster is created quicker
-        canvasMemoryLimit: D.width * D.height * 2,
+        canvasMemoryLimit: P.width * P.height * 2,
         // apply legacy data if needed
-        preprocessImageState: (G, A, J, F) => !h && I ? {
+        preprocessImageState: (G, A, J, v) => !h && I ? {
           ...G,
-          ...I(void 0, F.size, {
+          ...I(void 0, v.size, {
             ...n.getMetadata()
           })
         } : G
@@ -202,7 +202,7 @@ Ge() && Re() && Me() && he() && Ae()), z), Le = (e) => {
       }
     };
     y.queue((G) => {
-      t(P, C).then(({ dest: A }) => {
+      t(L, U).then(({ dest: A }) => {
         n.setMetadata("poster", URL.createObjectURL(A), !0), G(), r();
       });
     });
@@ -221,47 +221,47 @@ Ge() && Re() && Me() && he() && Ae()), z), Le = (e) => {
       editorOptions: m,
       legacyDataToImageState: O,
       imageState: R
-    } = v(t("GET_IMAGE_EDITOR"));
+    } = F(t("GET_IMAGE_EDITOR"));
     if (!I || !p || !m || !m.locale)
       return;
     delete m.imageReader, delete m.imageWriter;
-    const [S, P] = I, h = (a) => {
+    const [S, L] = I, h = (a) => {
       const { id: d } = a;
       return t("GET_ITEM", d);
-    }, D = (a) => {
+    }, P = (a) => {
       if (!t("GET_ALLOW_FILE_POSTER"))
         return !1;
       const d = h(a);
       return d ? t("GET_FILE_POSTER_FILTER_ITEM")(d) ? !!d.getMetadata("poster") : !1 : void 0;
-    }, C = ({ root: a, props: d, action: c }) => {
-      const { handleEditorResponse: u } = c, M = h(d), re = M.file, U = f({
+    }, U = ({ root: a, props: d, action: c }) => {
+      const { handleEditorResponse: u } = c, D = h(d), re = D.file, C = f({
         ...m,
-        imageReader: S(P),
+        imageReader: S(L),
         src: re
       });
-      console.log("load editor", structuredClone(M.getMetadata())), U.on("load", ({ size: x }) => {
-        let V = M.getMetadata("imageState");
-        !V && O && (V = O(U, x, M.getMetadata())), U.imageState = {
+      C.on("load", ({ size: x }) => {
+        let V = D.getMetadata("imageState");
+        !V && O && (V = O(C, x, D.getMetadata())), C.imageState = {
           ...R,
           ...V
         };
-      }), U.on("process", ({ imageState: x }) => {
-        M.setMetadata("imageState", x), u && u(!0);
-      }), U.on("close", () => {
+      }), C.on("process", ({ imageState: x }) => {
+        D.setMetadata("imageState", x), u && u(!0);
+      }), C.on("close", () => {
         u && u(!1);
       });
     }, G = ({ root: a, props: d }) => {
       const { id: c } = d, u = t("GET_ITEM", c);
       if (!u)
         return;
-      const M = u.file;
-      t("GET_IMAGE_EDITOR_SUPPORT_IMAGE")(M) && (t("GET_ALLOW_FILE_POSTER") && !u.getMetadata("poster") && a.dispatch("REQUEST_CREATE_IMAGE_POSTER", { id: c }), !(!t("GET_IMAGE_EDITOR_ALLOW_EDIT") || !t("GET_IMAGE_EDITOR_SUPPORT_EDIT")) && A(a, d));
+      const D = u.file;
+      t("GET_IMAGE_EDITOR_SUPPORT_IMAGE")(D) && (t("GET_ALLOW_FILE_POSTER") && !u.getMetadata("poster") && a.dispatch("REQUEST_CREATE_IMAGE_POSTER", { id: c }), !(!t("GET_IMAGE_EDITOR_ALLOW_EDIT") || !t("GET_IMAGE_EDITOR_SUPPORT_EDIT")) && A(a, d));
     }, A = (a, d) => {
       if (a.ref.handleEdit || (a.ref.handleEdit = (c) => {
         c.stopPropagation(), a.dispatch("EDIT_ITEM", { id: d.id });
-      }), D(d)) {
+      }), P(d)) {
         a.ref.editButton && a.ref.editButton.parentNode && a.ref.editButton.parentNode.removeChild(a.ref.editButton);
-        const c = r.createChildView(L, {
+        const c = r.createChildView(M, {
           label: "edit",
           icon: t("GET_IMAGE_EDITOR_ICON_EDIT"),
           opacity: 0
@@ -282,8 +282,8 @@ Ge() && Re() && Me() && he() && Ae()), z), Le = (e) => {
     r.registerDestroyer(({ root: a }) => {
       a.ref.buttonEditItem && a.ref.buttonEditItem.off("click", a.ref.handleEdit), a.ref.editButton && a.ref.editButton.removeEventListener("click", a.ref.handleEdit);
     });
-    const F = {
-      EDIT_ITEM: C,
+    const v = {
+      EDIT_ITEM: U,
       DID_LOAD_ITEM: G,
       DID_UPDATE_ITEM_METADATA: J,
       DID_REMOVE_ITEM: ({ props: a }) => {
@@ -300,9 +300,9 @@ Ge() && Re() && Me() && he() && Ae()), z), Le = (e) => {
       const a = ({ root: d }) => {
         d.ref.buttonEditItem && (d.ref.buttonEditItem.opacity = 1);
       };
-      F.DID_FILE_POSTER_LOAD = a;
+      v.DID_FILE_POSTER_LOAD = a;
     }
-    r.registerWriter(l(F));
+    r.registerWriter(l(v));
   }), o(
     "SHOULD_PREPARE_OUTPUT",
     (i, { query: n, change: r, item: t }) => new Promise((s) => {
@@ -325,6 +325,11 @@ Ge() && Re() && Me() && he() && Ae()), z), Le = (e) => {
       }
       t(!0);
     }).catch(() => {
+      const s = i("GET_IMAGE_EDITOR_SUPPORT_IMAGE_FORMAT");
+      if (s && s(n)) {
+        t(!0);
+        return;
+      }
       t(!1);
     });
   });
@@ -336,15 +341,15 @@ Ge() && Re() && Me() && he() && Ae()), z), Le = (e) => {
             imageProcessor: O,
             imageReader: R,
             imageWriter: S,
-            editorOptions: P,
+            editorOptions: L,
             imageState: h
-          } = v(n("GET_IMAGE_EDITOR"));
-          if (!O || !R || !S || !P)
+          } = F(n("GET_IMAGE_EDITOR"));
+          if (!O || !R || !S || !L)
             return;
-          const [D, C] = R, [G = Y, A] = S;
+          const [P, U] = R, [G = Y, A] = S;
           O(s, {
-            ...P,
-            imageReader: D(C),
+            ...L,
+            imageReader: P(U),
             imageWriter: G(A),
             imageState: {
               ...h,
@@ -382,6 +387,8 @@ Ge() && Re() && Me() && he() && Ae()), z), Le = (e) => {
       ],
       // receives file and should return true if can edit
       imageEditorSupportImage: [q, E.FUNCTION],
+      // receives file, should return true if can be loaded with Pintura
+      imageEditorSupportImageFormat: [null, E.FUNCTION],
       // cannot write if is <= IE11
       imageEditorSupportWriteImage: [X(), E.BOOLEAN],
       // should output image
@@ -400,7 +407,7 @@ Ge() && Re() && Me() && he() && Ae()), z), Le = (e) => {
     }
   };
 };
-w() && document.dispatchEvent(new CustomEvent("FilePond:pluginloaded", { detail: Le }));
+w() && document.dispatchEvent(new CustomEvent("FilePond:pluginloaded", { detail: Se }));
 export {
-  Le as default
+  Se as default
 };
