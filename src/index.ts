@@ -321,14 +321,15 @@ const plugin = (_) => {
             // get item
             const item = getItemByProps(props);
 
-            // file to open
-            const file = item.file;
+            // if a function is defined
+            const isFileSource = isFile(item.file) || isBlob(item.file);
+            const src = isFileSource ? item.file : item.source;
 
             // open the editor (sets editor properties and imageState property)
             const editor = createEditor({
                 ...editorOptions,
                 imageReader: createImageReader(imageReaderOptions),
-                src: file,
+                src,
             });
 
             // when the image has loaded, update the editor
@@ -348,13 +349,11 @@ const plugin = (_) => {
                 };
             });
 
-            editor.on('process', ({ imageState }) => {
-                // if already has post URL, try to revoke
-                // const poster = item.getMetadata('poster');
-                // poster && URL.revokeObjectURL(item.getMetadata('poster'));
+            editor.on('process', ({ src, imageState }) => {
+                // replace item mock source with dest
+                if (!isFileSource) item.setFile(src);
 
-                // store state, two seperate actions because we want to trigger preparefile when setting `imageState`
-                // item.setMetadata('poster', URL.createObjectURL(dest));
+                // store state
                 item.setMetadata('imageState', imageState);
 
                 // used in instant edit mode
@@ -653,6 +652,9 @@ const plugin = (_) => {
 
             // should output image
             imageEditorWriteImage: [true, Type.BOOLEAN],
+
+            // receives written image and can return single or more images
+            imageEditorBeforeOpenImage: [undefined, Type.FUNCTION],
 
             // receives written image and can return single or more images
             imageEditorAfterWriteImage: [undefined, Type.FUNCTION],
