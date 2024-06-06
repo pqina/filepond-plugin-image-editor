@@ -1,6 +1,6 @@
 {
     "name": "@pqina/filepond-plugin-image-editor",
-    "version": "9.1.0",
+    "version": "9.1.1",
     "browser": "dist/FilePondPluginImageEditor.js",
     "main": "dist/FilePondPluginImageEditor.js",
     "types": "dist/FilePondPluginImageEditor.d.ts",

@@ -1,8 +1,8 @@
 const Q = (e) => e instanceof File, te = (e) => /^image/.test(e.type), $ = (e, o, g = []) => {
-  const T = document.createElement(e), E = Object.getOwnPropertyDescriptors(T.__proto__);
+  const u = document.createElement(e), E = Object.getOwnPropertyDescriptors(u.__proto__);
   for (const l in o)
-    l === "style" ? T.style.cssText = o[l] : E[l] && E[l].set || /textContent|innerHTML/.test(l) || typeof o[l] == "function" ? T[l] = o[l] : T.setAttribute(l, o[l]);
-  return g.forEach((l) => T.appendChild(l)), T;
+    l === "style" ? u.style.cssText = o[l] : E[l] && E[l].set || /textContent|innerHTML/.test(l) || typeof o[l] == "function" ? u[l] = o[l] : u.setAttribute(l, o[l]);
+  return g.forEach((l) => u.appendChild(l)), u;
 };
 let j = null;
 const w = () => (j === null && (j = typeof window < "u" && typeof window.document < "u"), j), Ee = w() && !!Node.prototype.replaceChildren, de = Ee ? (
@@ -22,11 +22,11 @@ const ce = (e) => (de(B, e), B.parentNode || document.body.append(B), clearTimeo
 }, 500), e);
 let H = null;
 const le = () => (H === null && (H = w() && /^((?!chrome|android).)*(safari|iphone|ipad)/i.test(navigator.userAgent)), H), Ie = (e) => new Promise((o, g) => {
-  let T = !1;
-  !e.parentNode && le() && (T = !0, e.style.cssText = "position:absolute;visibility:hidden;pointer-events:none;left:0;top:0;width:0;height:0;", ce(e));
+  let u = !1;
+  !e.parentNode && le() && (u = !0, e.style.cssText = "position:absolute;visibility:hidden;pointer-events:none;left:0;top:0;width:0;height:0;", ce(e));
   const E = () => {
     const S = e.naturalWidth, y = e.naturalHeight;
-    S && y && (T && e.remove(), clearInterval(l), o({ width: S, height: y }));
+    S && y && (u && e.remove(), clearInterval(l), o({ width: S, height: y }));
   };
   e.onerror = (S) => {
     clearInterval(l), g(S);
@@ -34,24 +34,24 @@ const le = () => (H === null && (H = w() && /^((?!chrome|android).)*(safari|ipho
   const l = setInterval(E, 1);
   E();
 }), _e = (e) => new Promise((o, g) => {
-  const T = () => {
+  const u = () => {
     o({
       width: e.videoWidth,
       height: e.videoHeight
     });
   };
   if (e.readyState >= 1)
-    return T();
-  e.onloadedmetadata = T, e.onerror = () => g(e.error);
+    return u();
+  e.onloadedmetadata = u, e.onerror = () => g(e.error);
 }), Te = (e) => typeof e == "string", ue = (e) => new Promise((o) => {
-  const g = Te(e) ? e : URL.createObjectURL(e), T = () => {
+  const g = Te(e) ? e : URL.createObjectURL(e), u = () => {
     const l = new Image();
     l.src = g, o(l);
   };
   if (e instanceof Blob && te(e))
-    return T();
+    return u();
   const E = document.createElement("video");
-  E.preload = "metadata", E.onloadedmetadata = () => o(E), E.onerror = T, E.src = g;
+  E.preload = "metadata", E.onloadedmetadata = () => o(E), E.onerror = u, E.src = g;
 }), fe = (e) => e.nodeName === "VIDEO", ge = async (e) => {
   let o;
   e.src ? o = e : o = await ue(e);
@@ -95,7 +95,7 @@ let z = null;
 const ee = () => (z === null && (z = w() && // Can't run on Opera Mini due to lack of everything
 !Re() && // Require these APIs to feature detect a modern browser
 Ae() && he() && Se() && Ge() && Me()), z), Le = (e) => {
-  const { addFilter: o, utils: g, views: T } = e, { Type: E, createRoute: l } = g, { fileActionButton: S } = T, x = (({ parallel: i = 1, autoShift: n = !0 }) => {
+  const { addFilter: o, utils: g, views: u } = e, { Type: E, createRoute: l } = g, { fileActionButton: S } = u, x = (({ parallel: i = 1, autoShift: n = !0 }) => {
     const r = [];
     let t = 0;
     const s = () => {
@@ -234,7 +234,7 @@ Ae() && he() && Se() && Ge() && Me()), z), Le = (e) => {
       const d = G(a);
       return d ? t("GET_FILE_POSTER_FILTER_ITEM")(d) ? !!d.getMetadata("poster") : !1 : void 0;
     }, U = ({ root: a, props: d, action: c }) => {
-      const { handleEditorResponse: u } = c, R = G(d), Y = Q(R.file) || Z(R.file), se = Y ? R.file : R.source, C = f({
+      const { handleEditorResponse: T } = c, R = G(d), Y = Q(R.file) || Z(R.file), se = Y ? R.file : R.source, C = f({
         ...m,
         imageReader: L(P),
         src: se
@@ -246,16 +246,16 @@ Ae() && he() && Se() && Ge() && Me()), z), Le = (e) => {
           ...F
         };
       }), C.on("process", ({ src: V, imageState: F }) => {
-        Y || R.setFile(V), R.setMetadata("imageState", F), u && u(!0);
+        Y || R.setFile(V), R.setMetadata("imageState", F), T && T(!0);
       }), C.on("close", () => {
-        u && u(!1);
+        T && T(!1);
       });
     }, A = ({ root: a, props: d }) => {
-      const { id: c } = d, u = t("GET_ITEM", c);
-      if (!u)
+      const { id: c } = d, T = t("GET_ITEM", c);
+      if (!T)
         return;
-      const R = u.file;
-      t("GET_IMAGE_EDITOR_SUPPORT_IMAGE")(R) && (t("GET_ALLOW_FILE_POSTER") && !u.getMetadata("poster") && a.dispatch("REQUEST_CREATE_IMAGE_POSTER", { id: c }), !(!t("GET_IMAGE_EDITOR_ALLOW_EDIT") || !t("GET_IMAGE_EDITOR_SUPPORT_EDIT")) && M(a, d));
+      const R = T.file;
+      t("GET_IMAGE_EDITOR_SUPPORT_IMAGE")(R) && (t("GET_ALLOW_FILE_POSTER") && !T.getMetadata("poster") && a.dispatch("REQUEST_CREATE_IMAGE_POSTER", { id: c }), !(!t("GET_IMAGE_EDITOR_ALLOW_EDIT") || !t("GET_IMAGE_EDITOR_SUPPORT_EDIT")) && M(a, d));
     }, M = (a, d) => {
       if (a.ref.handleEdit || (a.ref.handleEdit = (c) => {
         c.stopPropagation(), a.dispatch("EDIT_ITEM", { id: d.id });
@@ -271,8 +271,8 @@ Ae() && he() && Se() && Ge() && Me()), z), Le = (e) => {
         ), c.on("click", a.ref.handleEdit), a.ref.buttonEditItem = r.appendChildView(c);
       } else {
         a.ref.buttonEditItem && a.removeChildView(a.ref.buttonEditItem);
-        const c = r.element.querySelector(".filepond--file-info-main"), u = document.createElement("button");
-        u.className = "filepond--action-edit-item-alt", u.innerHTML = t("GET_IMAGE_EDITOR_ICON_EDIT") + "<span>edit</span>", u.addEventListener("click", a.ref.handleEdit), c.appendChild(u), a.ref.editButton = u;
+        const c = r.element.querySelector(".filepond--file-info-main"), T = document.createElement("button");
+        T.className = "filepond--action-edit-item-alt", T.type = "button", T.innerHTML = t("GET_IMAGE_EDITOR_ICON_EDIT") + "<span>edit</span>", T.addEventListener("click", a.ref.handleEdit), c.appendChild(T), a.ref.editButton = T;
       }
     }, K = ({ root: a, props: d, action: c }) => {
       if (/imageState/.test(c.change.key) && t("GET_ALLOW_FILE_POSTER"))
@@ -290,8 +290,8 @@ Ae() && he() && Se() && Ge() && Me()), z), Le = (e) => {
         const { id: d } = a, c = t("GET_ITEM", d);
         if (!c)
           return;
-        const u = c.getMetadata("poster");
-        u && URL.revokeObjectURL(u);
+        const T = c.getMetadata("poster");
+        T && URL.revokeObjectURL(T);
       },
       REQUEST_CREATE_IMAGE_POSTER: ({ root: a, props: d }) => J(a.query, G(d)),
       DID_FILE_POSTER_LOAD: void 0

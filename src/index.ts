@@ -438,6 +438,7 @@ const plugin = (_) => {
                 const filenameElement = view.element.querySelector('.filepond--file-info-main');
                 const editButton = document.createElement('button');
                 editButton.className = 'filepond--action-edit-item-alt';
+                editButton.type = 'button';
                 editButton.innerHTML = query('GET_IMAGE_EDITOR_ICON_EDIT') + '<span>edit</span>';
                 editButton.addEventListener('click', root.ref.handleEdit);
                 filenameElement.appendChild(editButton);
