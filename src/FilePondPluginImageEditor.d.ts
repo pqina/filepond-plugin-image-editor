@@ -29,7 +29,11 @@ declare module 'filepond' {
             src: File | Blob;
             imageState: any;
             dest: File;
-        }) => File | { name: null | string; file: File | Blob }[];
+        }) =>
+            | File
+            | { name: null | string; file: File | Blob }[]
+            | Promise<File>
+            | Promise<{ name: null | string; file: File | Blob }[]>;
 
         /** Image Editor configuration object */
         imageEditor?: any;
