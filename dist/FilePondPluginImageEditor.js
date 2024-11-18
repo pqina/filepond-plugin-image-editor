@@ -1,18 +1,18 @@
 const Q = (e) => e instanceof File, te = (e) => /^image/.test(e.type), ie = (e) => typeof e == "string";
 function de(e, o) {
   o.split(";").forEach((f) => {
-    const [I, s] = f.split(":");
-    if (!I.length || !s)
+    const [_, s] = f.split(":");
+    if (!_.length || !s)
       return;
     const [c, h] = s.split("!important");
-    e.style.setProperty(I, c, ie(h) ? "important" : void 0);
+    e.style.setProperty(_, c, ie(h) ? "important" : void 0);
   });
 }
 const $ = (e, o, f = []) => {
-  const I = document.createElement(e), s = Object.getOwnPropertyDescriptors(I.__proto__);
+  const _ = document.createElement(e), s = Object.getOwnPropertyDescriptors(_.__proto__);
   for (const c in o)
-    c === "style" ? de(I, o[c]) : s[c] && s[c].set || /textContent|innerHTML/.test(c) || typeof o[c] == "function" ? I[c] = o[c] : I.setAttribute(c, o[c]);
-  return f.forEach((c) => I.appendChild(c)), I;
+    c === "style" ? de(_, o[c]) : s[c] && s[c].set || /textContent|innerHTML/.test(c) || typeof o[c] == "function" ? _[c] = o[c] : _.setAttribute(c, o[c]);
+  return f.forEach((c) => _.appendChild(c)), _;
 };
 let j = null;
 const w = () => (j === null && (j = typeof window < "u" && typeof window.document < "u"), j), ce = w() && !!Node.prototype.replaceChildren, le = ce ? (
@@ -27,47 +27,47 @@ const w = () => (j === null && (j = typeof window < "u" && typeof window.documen
   style: "position:absolute;left:0;top:0;width:99999px;height:0;pointer-events:none;contain:strict;margin:0;padding:0;"
 });
 let X;
-const Ie = (e) => (le(B, e), B.parentNode || document.body.append(B), clearTimeout(X), X = setTimeout(() => {
+const _e = (e) => (le(B, e), B.parentNode || document.body.append(B), clearTimeout(X), X = setTimeout(() => {
   B.remove();
 }, 500), e);
 let H = null;
-const _e = () => (H === null && (H = w() && /^((?!chrome|android).)*(safari|iphone|ipad)/i.test(navigator.userAgent)), H), ue = (e) => new Promise((o, f) => {
-  let I = !1;
-  !e.parentNode && _e() && (I = !0, e.style.cssText = "position:absolute;visibility:hidden;pointer-events:none;left:0;top:0;width:0;height:0;", Ie(e));
+const Ie = () => (H === null && (H = w() && /^((?!chrome|android).)*(safari|iphone|ipad)/i.test(navigator.userAgent)), H), Te = (e) => new Promise((o, f) => {
+  let _ = !1;
+  !e.parentNode && Ie() && (_ = !0, e.style.cssText = "position:absolute;visibility:hidden;pointer-events:none;left:0;top:0;width:0;height:0;", _e(e));
   const s = () => {
     const h = e.naturalWidth, y = e.naturalHeight;
-    h && y && (I && e.remove(), clearInterval(c), o({ width: h, height: y }));
+    h && y && (_ && e.remove(), clearInterval(c), o({ width: h, height: y }));
   };
   e.onerror = (h) => {
     clearInterval(c), f(h);
   };
   const c = setInterval(s, 1);
   s();
-}), Te = (e) => new Promise((o, f) => {
-  const I = () => {
+}), ue = (e) => new Promise((o, f) => {
+  const _ = () => {
     o({
       width: e.videoWidth,
       height: e.videoHeight
     });
   };
   if (e.readyState >= 1)
-    return I();
-  e.onloadedmetadata = I, e.onerror = () => f(e.error);
+    return _();
+  e.onloadedmetadata = _, e.onerror = () => f(e.error);
 }), fe = (e) => new Promise((o) => {
-  const f = ie(e) ? e : URL.createObjectURL(e), I = () => {
+  const f = ie(e) ? e : URL.createObjectURL(e), _ = () => {
     const c = new Image();
     c.src = f, o(c);
   };
   if (e instanceof Blob && te(e))
-    return I();
+    return _();
   const s = document.createElement("video");
-  s.preload = "metadata", s.onloadedmetadata = () => o(s), s.onerror = I, s.src = f;
+  s.preload = "metadata", s.onloadedmetadata = () => o(s), s.onerror = _, s.src = f;
 }), ge = (e) => e.nodeName === "VIDEO", me = async (e) => {
   let o;
   e.src ? o = e : o = await fe(e);
   let f;
   try {
-    f = ge(o) ? await Te(o) : await ue(o);
+    f = ge(o) ? await ue(o) : await Te(o);
   } finally {
     Q(e) && URL.revokeObjectURL(o.src);
   }
@@ -100,28 +100,28 @@ const Re = () => {
     k = !!Oe(e), ne(e), e = void 0;
   }
   return k;
-}, he = () => Object.prototype.toString.call(window.operamini) === "[object OperaMini]", Ge = () => "Promise" in window, Ae = () => "URL" in window && "createObjectURL" in window.URL, Me = () => "visibilityState" in document, Se = () => "performance" in window, Le = () => "File" in window;
+}, he = () => Object.prototype.toString.call(window.operamini) === "[object OperaMini]", Ge = () => "Promise" in window, Ae = () => "URL" in window && "createObjectURL" in window.URL, Me = () => "visibilityState" in document, Le = () => "performance" in window, Se = () => "File" in window;
 let z = null;
 const ee = () => (z === null && (z = w() && // Can't run on Opera Mini due to lack of everything
 !he() && // Require these APIs to feature detect a modern browser
-Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
-  const { addFilter: o, utils: f, views: I } = e, { Type: s, createRoute: c } = f, { fileActionButton: h } = I, x = (({ parallel: i = 1, autoShift: n = !0 }) => {
+Me() && Ge() && Se() && Ae() && Le()), z), Pe = (e) => {
+  const { addFilter: o, utils: f, views: _ } = e, { Type: s, createRoute: c } = f, { fileActionButton: h } = _, x = (({ parallel: i = 1, autoShift: n = !0 }) => {
     const r = [];
     let t = 0;
     const E = () => {
       if (!r.length)
         return g.oncomplete();
       t++, r.shift()(() => {
-        t--, t < i && _();
+        t--, t < i && I();
       });
-    }, _ = () => {
-      for (let u = 0; u < i - t; u++)
+    }, I = () => {
+      for (let T = 0; T < i - t; T++)
         E();
     }, g = {
-      queue: (u) => {
-        r.push(u), n && _();
+      queue: (T) => {
+        r.push(T), n && I();
       },
-      runJobs: _,
+      runJobs: I,
       oncomplete: () => {
       }
     };
@@ -130,8 +130,8 @@ Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
   o(
     "SHOULD_REMOVE_ON_REVERT",
     (i, { item: n, query: r }) => new Promise((t) => {
-      const { file: E } = n, _ = r("GET_ALLOW_IMAGE_EDITOR") && r("GET_IMAGE_EDITOR_ALLOW_EDIT") && r("GET_IMAGE_EDITOR_SUPPORT_EDIT") && r("GET_IMAGE_EDITOR_SUPPORT_IMAGE")(E);
-      t(!_);
+      const { file: E } = n, I = r("GET_ALLOW_IMAGE_EDITOR") && r("GET_IMAGE_EDITOR_ALLOW_EDIT") && r("GET_IMAGE_EDITOR_SUPPORT_EDIT") && r("GET_IMAGE_EDITOR_SUPPORT_IMAGE")(E);
+      t(!I);
     })
   ), o(
     "DID_LOAD_ITEM",
@@ -140,10 +140,10 @@ Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
         t(i);
         return;
       }
-      const { file: _ } = i;
+      const { file: I } = i;
       if (!n("GET_ALLOW_IMAGE_EDITOR") || !n(
         "GET_IMAGE_EDITOR_INSTANT_EDIT"
-      ) || !n("GET_IMAGE_EDITOR_SUPPORT_IMAGE")(_))
+      ) || !n("GET_IMAGE_EDITOR_SUPPORT_IMAGE")(I))
         return t(i);
       const g = () => {
         if (!b.length)
@@ -151,9 +151,9 @@ Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
         const { item: p, resolve: m, reject: O } = b[0];
         r("EDIT_ITEM", {
           id: p.id,
-          handleEditorResponse: u(p, m, O)
+          handleEditorResponse: T(p, m, O)
         });
-      }, u = (p, m, O) => (G) => {
+      }, T = (p, m, O) => (G) => {
         b.shift(), G ? m(p) : O(p), r("KICK"), g();
       };
       oe({ item: i, resolve: t, reject: E }), b.length === 1 && g();
@@ -180,14 +180,14 @@ Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
     const {
       imageProcessor: t,
       imageReader: E,
-      imageWriter: _,
+      imageWriter: I,
       editorOptions: g,
-      legacyDataToImageState: u,
+      legacyDataToImageState: T,
       imageState: p
     } = v(i("GET_IMAGE_EDITOR"));
     if (!t)
       return;
-    const [m, O] = E, [G = q, L] = _, P = n.file, A = n.getMetadata("imageState"), D = ae(i, {
+    const [m, O] = E, [G = q, S] = I, P = n.file, A = n.getMetadata("imageState"), D = ae(i, {
       width: 512,
       height: 512
     }), U = {
@@ -195,13 +195,13 @@ Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
       imageReader: m(O),
       imageWriter: G({
         // can optionally overwrite poster size
-        ...L || {},
+        ...S || {},
         // limit memory so poster is created quicker
         canvasMemoryLimit: D.width * D.height * 2,
         // apply legacy data if needed
-        preprocessImageState: (M, S, K, N) => !A && u ? {
+        preprocessImageState: (M, L, K, N) => !A && T ? {
           ...M,
-          ...u(void 0, N.size, {
+          ...T(void 0, N.size, {
             ...n.getMetadata()
           })
         } : M
@@ -212,8 +212,8 @@ Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
       }
     };
     x.queue((M) => {
-      t(P, U).then(({ dest: S }) => {
-        n.setMetadata("poster", URL.createObjectURL(S), !0), M(), r();
+      t(P, U).then(({ dest: L }) => {
+        n.setMetadata("poster", URL.createObjectURL(L), !0), M(), r();
       });
     });
   };
@@ -226,16 +226,16 @@ Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
       return;
     const {
       createEditor: g,
-      imageReader: u,
+      imageReader: T,
       imageWriter: p,
       editorOptions: m,
       legacyDataToImageState: O,
       imageState: G
     } = v(t("GET_IMAGE_EDITOR"));
-    if (!u || !p || !m || !m.locale)
+    if (!T || !p || !m || !m.locale)
       return;
     delete m.imageReader, delete m.imageWriter;
-    const [L, P] = u, A = (a) => {
+    const [S, P] = T, A = (a) => {
       const { id: d } = a;
       return t("GET_ITEM", d);
     }, D = (a) => {
@@ -244,9 +244,9 @@ Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
       const d = A(a);
       return d ? t("GET_FILE_POSTER_FILTER_ITEM")(d) ? !!d.getMetadata("poster") : !1 : void 0;
     }, U = ({ root: a, props: d, action: l }) => {
-      const { handleEditorResponse: T } = l, R = A(d), Y = Q(R.file) || Z(R.file), Ee = Y ? R.file : R.source, C = g({
+      const { handleEditorResponse: u } = l, R = A(d), Y = Q(R.file) || Z(R.file), Ee = Y ? R.file : R.source, C = g({
         ...m,
-        imageReader: L(P),
+        imageReader: S(P),
         src: Ee
       });
       C.on("load", ({ size: V }) => {
@@ -256,23 +256,23 @@ Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
           ...F
         };
       }), C.on("process", ({ src: V, imageState: F }) => {
-        Y || R.setFile(V), R.setMetadata("imageState", F), T && T(!0);
+        Y || R.setFile(V), R.setMetadata("imageState", F), u && u(!0);
       }), C.on("close", () => {
-        T && T(!1);
+        u && u(!1);
       });
     }, M = ({ root: a, props: d }) => {
-      const { id: l } = d, T = t("GET_ITEM", l);
-      if (!T)
+      const { id: l } = d, u = t("GET_ITEM", l);
+      if (!u)
         return;
-      const R = T.file;
-      t("GET_IMAGE_EDITOR_SUPPORT_IMAGE")(R) && (t("GET_ALLOW_FILE_POSTER") && !T.getMetadata("poster") && a.dispatch("REQUEST_CREATE_IMAGE_POSTER", { id: l }), !(!t("GET_IMAGE_EDITOR_ALLOW_EDIT") || !t("GET_IMAGE_EDITOR_SUPPORT_EDIT")) && S(a, d));
-    }, S = (a, d) => {
+      const R = u.file;
+      t("GET_IMAGE_EDITOR_SUPPORT_IMAGE")(R) && (t("GET_ALLOW_FILE_POSTER") && !u.getMetadata("poster") && a.dispatch("REQUEST_CREATE_IMAGE_POSTER", { id: l }), !(!t("GET_IMAGE_EDITOR_ALLOW_EDIT") || !t("GET_IMAGE_EDITOR_SUPPORT_EDIT")) && L(a, d));
+    }, L = (a, d) => {
       if (a.ref.handleEdit || (a.ref.handleEdit = (l) => {
         l.stopPropagation(), a.dispatch("EDIT_ITEM", { id: d.id });
       }), D(d)) {
         a.ref.editButton && a.ref.editButton.parentNode && a.ref.editButton.parentNode.removeChild(a.ref.editButton);
         const l = r.createChildView(h, {
-          label: "edit",
+          label: t("GET_IMAGE_EDITOR_LABEL_EDIT"),
           icon: t("GET_IMAGE_EDITOR_ICON_EDIT"),
           opacity: 0
         });
@@ -281,13 +281,13 @@ Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
         ), l.on("click", a.ref.handleEdit), a.ref.buttonEditItem = r.appendChildView(l);
       } else {
         a.ref.buttonEditItem && a.removeChildView(a.ref.buttonEditItem);
-        const l = r.element.querySelector(".filepond--file-info-main"), T = document.createElement("button");
-        T.className = "filepond--action-edit-item-alt", T.type = "button", T.innerHTML = t("GET_IMAGE_EDITOR_ICON_EDIT") + "<span>edit</span>", T.addEventListener("click", a.ref.handleEdit), l.appendChild(T), a.ref.editButton = T;
+        const l = r.element.querySelector(".filepond--file-info-main"), u = document.createElement("button");
+        u.className = "filepond--action-edit-item-alt", u.type = "button", u.innerHTML = t("GET_IMAGE_EDITOR_ICON_EDIT") + "<span>" + t("GET_IMAGE_EDITOR_LABEL_EDIT") + "</span>", u.addEventListener("click", a.ref.handleEdit), l.appendChild(u), a.ref.editButton = u;
       }
     }, K = ({ root: a, props: d, action: l }) => {
       if (/imageState/.test(l.change.key) && t("GET_ALLOW_FILE_POSTER"))
         return a.dispatch("REQUEST_CREATE_IMAGE_POSTER", { id: d.id });
-      /poster/.test(l.change.key) && (!t("GET_IMAGE_EDITOR_ALLOW_EDIT") || !t("GET_IMAGE_EDITOR_SUPPORT_EDIT") || S(a, d));
+      /poster/.test(l.change.key) && (!t("GET_IMAGE_EDITOR_ALLOW_EDIT") || !t("GET_IMAGE_EDITOR_SUPPORT_EDIT") || L(a, d));
     };
     r.registerDestroyer(({ root: a }) => {
       a.ref.buttonEditItem && a.ref.buttonEditItem.off("click", a.ref.handleEdit), a.ref.editButton && a.ref.editButton.removeEventListener("click", a.ref.handleEdit);
@@ -300,8 +300,8 @@ Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
         const { id: d } = a, l = t("GET_ITEM", d);
         if (!l)
           return;
-        const T = l.getMetadata("poster");
-        T && URL.revokeObjectURL(T);
+        const u = l.getMetadata("poster");
+        u && URL.revokeObjectURL(u);
       },
       REQUEST_CREATE_IMAGE_POSTER: ({ root: a, props: d }) => J(a.query, A(d)),
       DID_FILE_POSTER_LOAD: void 0
@@ -327,11 +327,11 @@ Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
     me(n).then(() => {
       const E = i("GET_IMAGE_TRANSFORM_IMAGE_FILTER");
       if (E) {
-        const _ = E(n);
-        if (typeof _ == "boolean")
-          return t(_);
-        if (typeof _.then == "function")
-          return _.then(t);
+        const I = E(n);
+        if (typeof I == "boolean")
+          return t(I);
+        if (typeof I.then == "function")
+          return I.then(t);
       }
       t(!0);
     }).catch(() => {
@@ -344,40 +344,40 @@ Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
     });
   });
   return o("PREPARE_OUTPUT", (i, { query: n, item: r }) => {
-    const t = (E) => new Promise((_, g) => {
-      const u = () => {
+    const t = (E) => new Promise((I, g) => {
+      const T = () => {
         x.queue((p) => {
           const m = r.getMetadata("imageState"), {
             imageProcessor: O,
             imageReader: G,
-            imageWriter: L,
+            imageWriter: S,
             editorOptions: P,
             imageState: A
           } = v(n("GET_IMAGE_EDITOR"));
-          if (!O || !G || !L || !P)
+          if (!O || !G || !S || !P)
             return;
-          const [D, U] = G, [M = q, S] = L;
+          const [D, U] = G, [M = q, L] = S;
           O(E, {
             ...P,
             imageReader: D(U),
-            imageWriter: M(S),
+            imageWriter: M(L),
             imageState: {
               ...A,
               ...m
             }
-          }).then(_).catch(g).finally(p);
+          }).then(I).catch(g).finally(p);
         });
       };
-      n("GET_ALLOW_FILE_POSTER") && !r.getMetadata("poster") ? J(n, r, u) : u();
+      n("GET_ALLOW_FILE_POSTER") && !r.getMetadata("poster") ? J(n, r, T) : T();
     });
     return new Promise((E) => {
-      se(n, i, r).then((_) => {
-        if (!_)
+      se(n, i, r).then((I) => {
+        if (!I)
           return E(i);
         t(i).then((g) => {
-          const u = n("GET_IMAGE_EDITOR_AFTER_WRITE_IMAGE");
-          if (u)
-            return Promise.resolve(u(g)).then(E);
+          const T = n("GET_IMAGE_EDITOR_AFTER_WRITE_IMAGE");
+          if (T)
+            return Promise.resolve(T(g)).then(E);
           E(g.dest);
         });
       });
@@ -414,6 +414,8 @@ Me() && Ge() && Le() && Ae() && Se()), z), Pe = (e) => {
         '<svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M8.5 17h1.586l7-7L15.5 8.414l-7 7V17zm-1.707-2.707l8-8a1 1 0 0 1 1.414 0l3 3a1 1 0 0 1 0 1.414l-8 8A1 1 0 0 1 10.5 19h-3a1 1 0 0 1-1-1v-3a1 1 0 0 1 .293-.707z" fill="currentColor" fill-rule="nonzero"/></svg>',
         s.STRING
       ],
+      // the icon to use for the edit button
+      imageEditorLabelEdit: ["edit", s.STRING],
       // location of processing button
       styleImageEditorButtonEditItemPosition: ["bottom center", s.STRING]
     }

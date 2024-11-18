@@ -412,7 +412,7 @@ const plugin = (_) => {
 
                 // add edit button to preview
                 const buttonView = view.createChildView(fileActionButton, {
-                    label: 'edit',
+                    label: query('GET_IMAGE_EDITOR_LABEL_EDIT'),
                     icon: query('GET_IMAGE_EDITOR_ICON_EDIT'),
                     opacity: 0,
                 });
@@ -439,7 +439,11 @@ const plugin = (_) => {
                 const editButton = document.createElement('button');
                 editButton.className = 'filepond--action-edit-item-alt';
                 editButton.type = 'button';
-                editButton.innerHTML = query('GET_IMAGE_EDITOR_ICON_EDIT') + '<span>edit</span>';
+                editButton.innerHTML =
+                    query('GET_IMAGE_EDITOR_ICON_EDIT') +
+                    '<span>' +
+                    query('GET_IMAGE_EDITOR_LABEL_EDIT') +
+                    '</span>';
                 editButton.addEventListener('click', root.ref.handleEdit);
                 filenameElement.appendChild(editButton);
 
@@ -668,6 +672,9 @@ const plugin = (_) => {
                 '<svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M8.5 17h1.586l7-7L15.5 8.414l-7 7V17zm-1.707-2.707l8-8a1 1 0 0 1 1.414 0l3 3a1 1 0 0 1 0 1.414l-8 8A1 1 0 0 1 10.5 19h-3a1 1 0 0 1-1-1v-3a1 1 0 0 1 .293-.707z" fill="currentColor" fill-rule="nonzero"/></svg>',
                 Type.STRING,
             ],
+
+            // the icon to use for the edit button
+            imageEditorLabelEdit: ['edit', Type.STRING],
 
             // location of processing button
             styleImageEditorButtonEditItemPosition: ['bottom center', Type.STRING],

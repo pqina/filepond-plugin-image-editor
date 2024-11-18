@@ -38,8 +38,11 @@ declare module 'filepond' {
         /** Image Editor configuration object */
         imageEditor?: any;
 
-        /** Image Editor edit icon */
+        /** Image Editor edit button icon */
         imageEditorIconEdit?: string;
+
+        /** Image Editor edit button label */
+        imageEditorLabelEdit?: string;
 
         /** Image Editor edit button position */
         styleImageEditorButtonEditItemPosition?: string;
