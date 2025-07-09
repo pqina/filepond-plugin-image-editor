@@ -1,11 +1,7 @@
 // @ts-ignore
 import { FilePondOptions } from 'filepond';
 
-// this fixes issue with TypeScript no default export error
-declare module '@pqina/filepond-plugin-image-editor' {
-    const plugin: any;
-    export default plugin;
-}
+export * as default from './FilePondPluginImageEditor.js';
 
 declare module 'filepond' {
     export interface FilePondOptions {

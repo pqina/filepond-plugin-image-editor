@@ -1,6 +1,8 @@
 // @ts-ignore
 import { FilePondOptions } from 'filepond';
 
+export * as default from './FilePondPluginImageEditor.js';
+
 declare module 'filepond' {
     export interface FilePondOptions {
         /** Enable or disable image editor */
